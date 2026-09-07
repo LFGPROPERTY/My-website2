@@ -1,0 +1,20 @@
+{
+  "name": "lfg-website",
+  "version": "1.0.0",
+  "description": "Marketing website for LFG \u2014 a privately owned property development and hotel management group.",
+  "private": true,
+  "scripts": {
+    "start": "serve . -l 3000",
+    "dev": "serve . -l 3000"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "keywords": [
+    "lfg",
+    "property-development",
+    "hospitality",
+    "static-site"
+  ],
+  "license": "UNLICENSED"
+}

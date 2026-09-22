@@ -1,103 +1,56 @@
-# LFG Website
+# LFG Property Website
 
-Marketing website for **LFG** — a privately owned property development and hotel management group operating across residential, commercial and hospitality assets in Sydney, Tasmania and Queensland.
-
-This is a static site: plain HTML, CSS and vanilla JavaScript. No build step, no framework, no backend — it runs by opening `index.html` in a browser, or by serving the folder with any static file server.
-
-## Features
-
-- Responsive one-page layout (hero, company story, principles, values accordion, services, filterable portfolio grid, project case studies, hospitality profiles, enquiry form, footer)
-- Filterable portfolio grid (All / Development / Hospitality) with vanilla JS, no dependencies
-- Custom inline SVG illustration for the "Our Story" section
-- Enquiry form that opens the visitor's email client with a pre-filled message (`mailto:`) — see [Enquiry form](#enquiry-form) below if you want to wire it up to a real backend instead
-- Scroll-aware navigation bar (transparent over the hero, solid on scroll)
-- Mobile navigation menu
-- Respects `prefers-reduced-motion`
+Marketing website for **LFG** — property development, hospitality and asset management. A single-page static site covering the company story, development and hospitality portfolio, case studies, and contact details.
 
 ## Project structure
 
 ```
-lfg-website/
-├── index.html              # All page markup
-├── css/
-│   └── styles.css          # All styles (design tokens as CSS custom properties)
-├── js/
-│   └── script.js           # Nav scroll/menu behaviour, portfolio filter, accordion, enquiry form
-├── images/
-│   ├── logo.png
-│   ├── hero.jpg
-│   ├── lindfield-*.jpg     # Greenview Lindfield case study photos
-│   ├── caption-*.jpg       # Caption by Hyatt Central Sydney case study photos
-│   ├── hobart.jpg          # Best Western Hobart
-│   ├── launceston.jpg      # Best Western Plus Launceston
-│   ├── bayvillage.jpg      # Bay Village Resort Cairns
-│   ├── gordon.jpg          # LFG Gordon Pty Ltd site render
-│   └── story-illustration.svg
-├── package.json            # Only used to run a local dev server (see below)
-└── README.md
+.
+├── index.html            # The entire site (markup, CSS and JS in one file)
+├── assets/
+│   └── images/           # All photos, renders and favicon/touch-icon assets
+├── package.json          # Optional convenience scripts for local preview
+└── .gitignore
 ```
 
-## Getting started
+The site is plain HTML/CSS/JS — no build step, no framework, no bundler. `index.html` contains the page markup, an embedded `<style>` block, and a small inline `<script>` for interactive bits (nav, filters, etc.). All images live under `assets/images/` and are referenced with relative paths, so the whole folder is portable as-is.
 
-You don't need Node.js or any build tooling to view this site — it's plain static HTML/CSS/JS.
+The only external dependency loaded at runtime is Google Fonts (via `<link>` tags in the `<head>`), so an internet connection is needed to see the intended typefaces; everything else works fully offline.
 
-### Option 1 — just open it
+## Running locally
 
-Double-click `index.html`, or open it directly in a browser:
+Any of the following work:
 
+**Just open the file**
+Double-click `index.html`, or open it directly in a browser — no server required for a first look.
+
+**With a local static server** (recommended, avoids any browser file:// quirks)
 ```bash
-open index.html          # macOS
-start index.html         # Windows
-xdg-open index.html      # Linux
-```
-
-Everything (images, styles, script) is linked with relative paths, so this works with no server at all.
-
-### Option 2 — run a local server (recommended for development)
-
-Serving over `http://localhost` avoids the occasional browser quirk with `file://` pages (and is closer to how it'll behave once deployed).
-
-```bash
-npm install
 npm start
+# or
+npm run serve
 ```
+Both spin up a static file server (via `http-server` / `serve`, fetched on demand with `npx`) and print a local URL to open, e.g. http://localhost:8080.
 
-This starts a static server at **http://localhost:3000**.
-
-You can also skip `npm install` entirely and just run:
-
+**With Python, if you don't want to touch npm at all**
 ```bash
-npx serve .
+python3 -m http.server 8080
 ```
-
-## Deployment
-
-This is a static site, so it can be hosted anywhere that serves static files:
-
-- **GitHub Pages** — push to a repo, then enable Pages (Settings → Pages → deploy from `main` branch, root folder). The site will be live at `https://<username>.github.io/<repo>/`.
-- **Netlify / Vercel** — drag-and-drop the folder, or connect the GitHub repo; no build command is required (leave the build command empty and set the publish directory to `/`).
-- **Any static host / S3 / plain web server** — upload the folder as-is.
-
-## Enquiry form
-
-The enquiry form (in the "Send an enquiry" section) is wired up with a small vanilla-JS handler in `js/script.js`. On submit, it builds a `mailto:info@lfgproperty.com.au` link from the filled-in fields and opens the visitor's default email client with the message pre-filled. There's no backend involved.
-
-If you'd rather have submissions go straight to an inbox, a spreadsheet, or a CRM without relying on the visitor's email client, swap the submit handler for a form backend such as:
-
-- [Formspree](https://formspree.io/)
-- [Netlify Forms](https://docs.netlify.com/manage/forms/setup/) (if hosting on Netlify)
-- A custom endpoint (e.g. a small serverless function) that the form `POST`s to
-
-The relevant code is the `enquiryForm` submit handler near the bottom of `js/script.js`.
+then visit http://localhost:8080.
 
 ## Editing content
 
-Everything is in `index.html` — there's no CMS or templating layer. Text, links and image `src` attributes can be edited directly. Colours, spacing and typography are controlled by CSS custom properties at the top of `css/styles.css` (under `:root`), so brand-wide changes (e.g. the accent colour) can usually be made in one place.
+Everything — copy, portfolio entries, case studies, contact details — lives directly in `index.html` as plain HTML. There's no CMS or data file to update separately; find the section you want to change (sections are marked with `id`s like `#story`, `#portfolio`, `#hospitality`, `#contact`) and edit the text or `<img>` tags in place. To add a new photo, drop it into `assets/images/` and reference it as `assets/images/your-file.jpg`.
 
-## Browser support
+## Deploying
 
-Built with modern, broadly-supported CSS (Grid, custom properties, `aspect-ratio`) and vanilla JS (`<details>`/`<summary>`, `FormData`). Works in current versions of Chrome, Firefox, Safari and Edge.
+Since this is a static site with no build step, it can be hosted anywhere that serves static files, for example:
 
-## License
+- **GitHub Pages** — push this repo to GitHub, then enable Pages for the repo (Settings → Pages → Deploy from branch → `main` / root). The site will be served directly from `index.html`.
+- **Netlify / Vercel / Cloudflare Pages** — connect the repo and deploy with no build command and the publish directory set to the repo root.
+- **Any static file host** — upload the contents of this folder as-is.
 
-Private/unlicensed — content and imagery belong to LFG. Not intended for reuse outside this project.
+## Notes
+
+- Images were originally embedded as base64 inside the HTML; they've been extracted into `assets/images/` here to keep the repo readable and the page weight down.
+- Filenames under `assets/images/` are derived from each image's descriptive alt text.

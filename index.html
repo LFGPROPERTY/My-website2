@@ -64,6 +64,8 @@ img{max-width:100%; display:block;}
 }
 .eyebrow.on-dark{color:#ff9b86;}
 .rule{height:1px; background:var(--line); border:0; margin:0;}
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+.reveal.in-view{opacity:1; transform:translateY(0);}
 .btn{
   display:inline-flex;
   align-items:center;
@@ -189,22 +191,6 @@ section{padding:130px 0;}
 .story-visual{width:100%; box-shadow:0 22px 48px rgba(14,27,58,0.12);}
 .story-visual svg{width:100%; height:auto; display:block;}
 
-.now-strip{margin-top:110px; padding-top:70px; border-top:1px solid var(--line);}
-.now-head{max-width:620px; margin-bottom:40px;}
-.now-head h3{font-size:clamp(21px,2.2vw,26px); font-weight:700; letter-spacing:-0.01em;}
-.now-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-@media (max-width:900px){ .now-grid{grid-template-columns:1fr;} }
-.now-item{
-  display:block; background:#fff; padding:34px 32px; text-decoration:none; color:inherit;
-  transition:background .25s ease;
-}
-.now-item:hover{background:var(--paper-2);}
-.now-no{font-family:'Manrope',sans-serif; font-weight:800; font-size:12.5px; color:var(--accent); letter-spacing:0.06em; display:block; margin-bottom:18px;}
-.now-item h4{font-size:17.5px; margin-bottom:10px;}
-.now-item p{color:var(--slate); font-size:14px; margin-bottom:20px;}
-.now-link{font-size:12.5px; font-weight:700; color:var(--navy); text-decoration:none; border-bottom:1px solid var(--navy); padding-bottom:3px;}
-.now-item:hover .now-link{color:var(--accent); border-color:var(--accent);}
-
 .quote-block{
   margin-top:90px; padding-top:70px; border-top:1px solid var(--line);
   max-width:900px;
@@ -285,6 +271,7 @@ section{padding:130px 0;}
 }
 .pf-card.pf-hidden{display:none;}
 .pf-card .pf-img{width:100%; aspect-ratio:4/3; object-fit:cover; display:block;}
+.pf-img-link{display:block;}
 .pf-card .pf-body{padding:22px 22px 26px;}
 .pf-status{
   display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
@@ -334,6 +321,34 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
 .foot-col p, .foot-col a{display:block; font-size:14.5px; color:rgba(255,255,255,0.82); text-decoration:none; margin-bottom:8px;}
 .foot-col a:hover{color:#fff;}
 .foot-bottom{padding-top:26px; display:flex; justify-content:space-between; font-size:12.5px; color:rgba(255,255,255,0.4); flex-wrap:wrap; gap:10px;}
+.enquiry{padding:64px 0; border-bottom:1px solid rgba(255,255,255,0.14);}
+.enquiry-head{max-width:520px; margin:0 auto 36px; text-align:center;}
+.enquiry-head h3{color:#fff; font-size:clamp(24px,2.8vw,30px);}
+.enquiry-head p{color:rgba(255,255,255,0.6); font-size:14.5px; margin-top:14px;}
+.enquiry-form{max-width:640px; margin:0 auto;}
+.enquiry-form .field-row{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+@media (max-width:600px){ .enquiry-form .field-row{grid-template-columns:1fr;} }
+.enquiry-form .field{margin-bottom:20px;}
+.enquiry-form label{display:block; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:8px;}
+.enquiry-form input, .enquiry-form select, .enquiry-form textarea{
+  width:100%; display:block; box-sizing:border-box;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:6px;
+  padding:13px 14px;
+  font-family:'Inter',sans-serif;
+  font-size:14.5px;
+  color:#fff;
+  transition:border-color .2s ease, background .2s ease;
+}
+.enquiry-form select{ color-scheme:dark; }
+.enquiry-form input::placeholder, .enquiry-form textarea::placeholder{color:rgba(255,255,255,0.35);}
+.enquiry-form input:focus, .enquiry-form select:focus, .enquiry-form textarea:focus{
+  outline:none; border-color:rgba(255,255,255,0.55); background:rgba(255,255,255,0.1);
+}
+.enquiry-form textarea{resize:vertical; min-height:110px;}
+.enquiry-form .btn{border:0; cursor:pointer; margin-top:4px;}
+.enquiry-note{font-size:13px; color:rgba(255,255,255,0.5); margin-top:16px; text-align:center;}
 </style>
 </head>
 <body>
@@ -488,33 +503,6 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
       </div>
     </div>
 
-    <div class="now-strip">
-      <div class="now-head">
-        <span class="eyebrow" style="margin-bottom:8px;">Right now</span>
-        <h3>Where each part of the business stands today</h3>
-      </div>
-      <div class="now-grid">
-        <a href="#portfolio" class="now-item">
-          <span class="now-no">01</span>
-          <h4>Property Development</h4>
-          <p>900 Pacific Highway has DA approval for 30 apartments on a boutique North Shore site &mdash; the next project moving toward construction.</p>
-          <span class="now-link">See portfolio</span>
-        </a>
-        <a href="#hospitality" class="now-item">
-          <span class="now-no">02</span>
-          <h4>Hospitality Management</h4>
-          <p>End-to-end hotel management services across our hospitality portfolio, delivered on behalf of owners and investors.</p>
-          <span class="now-link">See hospitality</span>
-        </a>
-        <a href="#services" class="now-item">
-          <span class="now-no">03</span>
-          <h4>Asset &amp; Investment</h4>
-          <p>Caption by Hyatt Central Sydney opened in October 2025 &mdash; the first Caption by Hyatt hotel in Australia, now under active management.</p>
-          <span class="now-link">See services</span>
-        </a>
-      </div>
-    </div>
-
     <div class="quote-block">
       <p>&ldquo;To develop and operate assets with the discipline of an owner &mdash; delivering quality that holds its value long after completion.&rdquo;</p>
     </div>
@@ -590,7 +578,7 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
       <div class="svc-card">
         <span class="tagno">02</span>
         <h3>Hospitality Management</h3>
-        <p>End-to-end hotel management services across our Best Western, Bay Village and Caption by Hyatt assets, on behalf of owners and investors.</p>
+        <p>End-to-end hotel management services across our hospitality portfolio, delivered on behalf of owners and investors.</p>
       </div>
       <div class="svc-card">
         <span class="tagno">03</span>
@@ -606,7 +594,7 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
     <div class="pf-head">
       <div>
         <span class="eyebrow on-dark">Our portfolio</span>
-        <h2>Developments &amp; hotel assets</h2>
+        <h2>Developments &amp; Hotel Assets</h2>
       </div>
       <p>Each entity is held and managed separately, giving LFG a clear view across active developments and hotel operations.</p>
     </div>
@@ -619,10 +607,10 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
 
     <div class="pf-grid">
       <div class="pf-card" data-category="development">
-        <img class="pf-img" src="assets/images/lindfield-luxury-townhouses.jpg" alt="Lindfield luxury townhouses">
+        <a href="#case-greenview" class="pf-img-link" aria-label="View details"><img class="pf-img" src="assets/images/lindfield-luxury-townhouses.jpg" alt="Lindfield luxury townhouses"></a>
         <div class="pf-body">
           <span class="pf-status">Now Selling</span>
-          <h4>Greenview LINDFIELD</h4>
+          <h4>Greenview</h4>
           <p class="pf-loc">Lindfield, Sydney</p>
           <div class="pf-stats">
             <div class="pf-stat"><div class="v">42</div><div class="l">Townhouses</div></div>
@@ -631,50 +619,46 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
         </div>
       </div>
       <div class="pf-card" data-category="hospitality">
-        <img class="pf-img" src="assets/images/caption-by-hyatt-central-sydney.jpg" alt="Caption by Hyatt Central Sydney">
+        <a href="#case-caption-hyatt" class="pf-img-link" aria-label="View details"><img class="pf-img" src="assets/images/caption-by-hyatt-central-sydney.jpg" alt="Caption by Hyatt Central Sydney"></a>
         <div class="pf-body">
           <span class="pf-status">Completed</span>
           <h4>Caption by Hyatt Central Sydney</h4>
           <p class="pf-loc">Haymarket, Sydney</p>
           <div class="pf-stats">
             <div class="pf-stat"><div class="v">174</div><div class="l">Rooms</div></div>
-            <div class="pf-stat"><div class="v">2025</div><div class="l">Opened</div></div>
           </div>
         </div>
       </div>
       <div class="pf-card" data-category="hospitality">
-        <img class="pf-img" src="assets/images/bay-village-resort-cairns-entrance-and-bayleaf-restaurant.jpg" alt="Bay Village Resort Cairns entrance and Bayleaf restaurant">
+        <a href="#hospitality-bay-village" class="pf-img-link" aria-label="View details"><img class="pf-img" src="assets/images/bay-village-resort-cairns-entrance-and-bayleaf-restaurant.jpg" alt="Bay Village Resort Cairns entrance and Bayleaf restaurant"></a>
         <div class="pf-body">
           <span class="pf-status">Recently acquired</span>
           <h4>Bay Village Resort Cairns</h4>
           <p class="pf-loc">Cairns, Queensland</p>
           <div class="pf-stats">
             <div class="pf-stat"><div class="v">72</div><div class="l">Rooms</div></div>
-            <div class="pf-stat"><div class="v">4&#9733;</div><div class="l">Rating</div></div>
           </div>
         </div>
       </div>
       <div class="pf-card" data-category="hospitality">
-        <img class="pf-img" src="assets/images/best-western-hobart.jpg" alt="Best Western Hobart">
+        <a href="#hospitality-best-western-hobart" class="pf-img-link" aria-label="View details"><img class="pf-img" src="assets/images/best-western-hobart.jpg" alt="Best Western Hobart"></a>
         <div class="pf-body">
           <span class="pf-status">Operating</span>
           <h4>Best Western Hobart</h4>
           <p class="pf-loc">Hobart, Tasmania</p>
           <div class="pf-stats">
             <div class="pf-stat"><div class="v">141</div><div class="l">Rooms</div></div>
-            <div class="pf-stat"><div class="v">4&#9733;</div><div class="l">Rating</div></div>
           </div>
         </div>
       </div>
       <div class="pf-card" data-category="hospitality">
-        <img class="pf-img" src="assets/images/best-western-plus-launceston.jpg" alt="Best Western Plus Launceston">
+        <a href="#hospitality-best-western-launceston" class="pf-img-link" aria-label="View details"><img class="pf-img" src="assets/images/best-western-plus-launceston.jpg" alt="Best Western Plus Launceston"></a>
         <div class="pf-body">
           <span class="pf-status">Operating</span>
           <h4>Best Western Plus Launceston</h4>
           <p class="pf-loc">Launceston, Tasmania</p>
           <div class="pf-stats">
             <div class="pf-stat"><div class="v">116</div><div class="l">Rooms</div></div>
-            <div class="pf-stat"><div class="v">4.5&#9733;</div><div class="l">Rating</div></div>
           </div>
         </div>
       </div>
@@ -690,7 +674,7 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
         </div>
       </div>
       <div class="pf-card" data-category="development">
-        <img class="pf-img" src="assets/images/the-future-burwood-building-exterior.jpg" alt="The Future, Burwood building exterior">
+        <a href="#case-the-future" class="pf-img-link" aria-label="View details"><img class="pf-img" src="assets/images/the-future-burwood-building-exterior.jpg" alt="The Future, Burwood building exterior"></a>
         <div class="pf-body">
           <span class="pf-status">Now selling</span>
           <h4>The Future</h4>
@@ -705,7 +689,7 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
   </div>
 </section>
 
-<section class="case">
+<section class="case" id="case-greenview">
   <div class="wrap">
     <div class="case-grid">
       <div class="case-photo"><img src="assets/images/lindfield-luxury-townhouses.jpg" alt="16-18 Beaconsfield Parade townhouses, Lindfield"></div>
@@ -727,29 +711,7 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
   </div>
 </section>
 
-<section class="case" style="padding-top:0;">
-  <div class="wrap">
-    <div class="case-grid rev">
-      <div>
-        <span class="case-tag">Case study</span>
-        <h3>Caption by Hyatt Central Sydney</h3>
-        <p class="addr">13 Parker Street, Haymarket NSW 2000</p>
-        <p class="desc">The Haymarket site was acquired in 2019 and developed into a 174-room hotel. Constructed by Hickory and completed in early 2025, the property is managed by Hyatt and operates as Caption by Hyatt Central Sydney&mdash;the first Caption by Hyatt hotel in Australia.</p>
-        <span class="status">Opened 13 October 2025</span>
-        <a href="https://www.hyatt.com/caption-by-hyatt/en-US/sydcp-caption-by-hyatt-central-sydney" target="_blank" rel="noopener" class="hotel-link">Visit hotel homepage</a>
-      </div>
-      <div class="case-photo"><img src="assets/images/caption-by-hyatt-central-sydney.jpg" alt="Caption by Hyatt Central Sydney building exterior"></div>
-    </div>
-    <div class="shot-grid">
-      <div class="shot"><img src="assets/images/guest-room-with-city-views.jpg" alt="Guest room with city views"><div class="cap">Guest room</div></div>
-      <div class="shot"><img src="assets/images/guest-room-with-lounge-seating.jpg" alt="Guest room with lounge seating"><div class="cap">Guest room</div></div>
-      <div class="shot"><img src="assets/images/talk-shop-lounge-and-dining-area.jpg" alt="Talk Shop lounge and dining area"><div class="cap">Food &amp; beverage / lounge</div></div>
-      <div class="shot"><img src="assets/images/reception-desk.jpg" alt="Reception desk"><div class="cap">Lobby / reception</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="case" style="padding-top:0;">
+<section class="case" style="padding-top:0;" id="case-the-future">
   <div class="wrap">
     <div class="case-grid">
       <div class="case-photo"><img src="assets/images/the-future-burwood-building-exterior.jpg" alt="The Future, Burwood building exterior at dusk"></div>
@@ -775,42 +737,53 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
   <div class="wrap">
     <div class="svc-head">
       <span class="eyebrow">Hospitality</span>
-      <h2>Three hotels, from Tasmania to Tropical North Queensland</h2>
+      <h2>Hotels across Australia</h2>
       <p>LFG's hospitality arm oversees end-to-end hotel management on behalf of owners and investors &mdash; building high-performing teams and delivering strong operational outcomes across every property.</p>
     </div>
 
-    <div class="case-grid" style="margin-top:76px;">
+    <div class="case-grid rev" style="margin-top:76px;" id="case-caption-hyatt">
+      <div>
+        <h3 style="margin-bottom:28px;">Caption by Hyatt Central Sydney</h3>
+        <p class="addr">13 Parker Street, Haymarket NSW 2000</p>
+        <p class="desc">The Haymarket site was acquired in 2019 and developed into a 174-room hotel. Constructed by Hickory and completed in early 2025, the property is managed by Hyatt and operates as Caption by Hyatt Central Sydney&mdash;the first Caption by Hyatt hotel in Australia.</p>
+        <span class="status">Opened 13 October 2025</span>
+        <a href="https://www.hyatt.com/caption-by-hyatt/en-US/sydcp-caption-by-hyatt-central-sydney" target="_blank" rel="noopener" class="hotel-link">Visit hotel homepage</a>
+      </div>
+      <div class="case-photo"><img src="assets/images/caption-by-hyatt-central-sydney.jpg" alt="Caption by Hyatt Central Sydney building exterior"></div>
+    </div>
+
+    <div class="case-grid" style="margin-top:100px;" id="hospitality-best-western-hobart">
       <div class="case-photo"><img src="assets/images/best-western-hobart.jpg" alt="Best Western Hobart exterior"></div>
       <div>
         <span class="case-tag">Operating</span>
         <h3 style="margin-bottom:28px;">Best Western Hobart</h3>
         <p class="addr">156 Bathurst Street, Hobart TAS 7000</p>
-        <p class="desc">A 141-room, 4-star hotel set in the heart of Hobart's CBD, within easy reach of the waterfront, Salamanca Place and the city's dining precinct. The hotel serves a steady mix of corporate and leisure guests year-round, and forms part of LFG's established Tasmanian hospitality base.</p>
-        <span class="status">141 rooms &middot; 4 star</span>
+        <p class="desc">A 141-room hotel set in the heart of Hobart's CBD, within easy reach of the waterfront, Salamanca Place and the city's dining precinct. The hotel serves a steady mix of corporate and leisure guests year-round, and forms part of LFG's established Tasmanian hospitality base.</p>
+        <span class="status">141 rooms</span>
         <a href="https://bestwesternhotelhobart.com.au/" target="_blank" rel="noopener" class="hotel-link">Visit hotel homepage</a>
       </div>
     </div>
 
-    <div class="case-grid rev" style="margin-top:100px;">
+    <div class="case-grid rev" style="margin-top:100px;" id="hospitality-best-western-launceston">
       <div>
         <span class="case-tag">Operating</span>
         <h3 style="margin-bottom:28px;">Best Western Plus Launceston</h3>
         <p class="addr">3 Earl Street, Launceston TAS 7250</p>
-        <p class="desc">A 116-room, 4.5-star hotel in central Launceston, offering conference and event facilities alongside comfortable accommodation for business and leisure travellers exploring Tasmania's north. It's the higher-rated of LFG's two Tasmanian properties and a consistent performer within the portfolio.</p>
-        <span class="status">116 rooms &middot; 4.5 star</span>
+        <p class="desc">A 116-room hotel in central Launceston, offering conference and event facilities alongside comfortable accommodation for business and leisure travellers exploring Tasmania's north. It's the higher-rated of LFG's two Tasmanian properties and a consistent performer within the portfolio.</p>
+        <span class="status">116 rooms</span>
         <a href="https://bestwesternhotellaunceston.com.au/" target="_blank" rel="noopener" class="hotel-link">Visit hotel homepage</a>
       </div>
       <div class="case-photo"><img src="assets/images/best-western-plus-launceston.jpg" alt="Best Western Plus Launceston exterior"></div>
     </div>
 
-    <div class="case-grid" style="margin-top:100px;">
+    <div class="case-grid" style="margin-top:100px;" id="hospitality-bay-village">
       <div class="case-photo"><img src="assets/images/bay-village-resort-cairns-entrance-and-bayleaf-restaurant.jpg" alt="Bay Village Resort Cairns entrance and Bayleaf restaurant"></div>
       <div>
         <span class="case-tag">Recently acquired</span>
         <h3 style="margin-bottom:28px;">Bay Village Resort Cairns</h3>
         <p class="addr">227 Lake Street, Cairns QLD 4870</p>
         <p class="desc">A boutique, Balinese-style resort set among tropical gardens in the heart of Cairns, just a short walk from the Esplanade waterfront. The 72-room property includes the in-house Bayleaf Balinese Restaurant and is LFG's newest hospitality acquisition &mdash; extending the portfolio into Tropical North Queensland.</p>
-        <span class="status">72 rooms &middot; 4&#9733; &middot; recently acquired</span>
+        <span class="status">72 rooms &middot; recently acquired</span>
         <a href="https://www.bayvillage.com.au/" target="_blank" rel="noopener" class="hotel-link">Visit hotel homepage</a>
       </div>
     </div>
@@ -842,6 +815,47 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
         <a href="tel:+61294196279">+61 2 9419 6279</a>
       </div>
     </div>
+
+    <div class="enquiry">
+      <div class="enquiry-head">
+        <span class="eyebrow on-dark">Get in touch</span>
+        <h3>Send us an enquiry</h3>
+        <p>Tell us a little about what you're looking for and our team will be in touch.</p>
+      </div>
+      <form class="enquiry-form" id="enquiryForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="enq-name">Full name</label>
+            <input type="text" id="enq-name" name="name" placeholder="Your full name" required>
+          </div>
+          <div class="field">
+            <label for="enq-email">Email</label>
+            <input type="email" id="enq-email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="enq-phone">Phone (optional)</label>
+            <input type="tel" id="enq-phone" name="phone" placeholder="+61">
+          </div>
+          <div class="field">
+            <label for="enq-type">Enquiry type</label>
+            <select id="enq-type" name="type">
+              <option>General enquiry</option>
+              <option>Development / investment</option>
+              <option>Hospitality partnership</option>
+              <option>Media</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="enq-message">Message</label>
+          <textarea id="enq-message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+        </div>
+        <button type="submit" class="btn on-dark">Send enquiry</button>
+      </form>
+    </div>
+
     <div class="foot-bottom">
       <span>LFG &mdash; Property development &middot; hospitality &middot; asset management</span>
       <span>&copy; 2026 LFG Holdings</span>
@@ -884,6 +898,58 @@ footer{background:var(--navy); color:#fff; padding:80px 0 30px;}
       });
     });
   });
+  document.querySelectorAll('.pf-img-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const headerOffset = header.getBoundingClientRect().height + 20;
+        const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const revealTargets = document.querySelectorAll('#story, #values, #services, #portfolio, section.case, #hospitality, .cta-band');
+  revealTargets.forEach(el => el.classList.add('reveal'));
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealTargets.forEach(el => revealObserver.observe(el));
+  } else {
+    revealTargets.forEach(el => el.classList.add('in-view'));
+  }
+
+  const enquiryForm = document.getElementById('enquiryForm');
+  if (enquiryForm) {
+    enquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(enquiryForm);
+      const name = (data.get('name') || '').toString().trim();
+      const email = (data.get('email') || '').toString().trim();
+      const phone = (data.get('phone') || '').toString().trim();
+      const type = (data.get('type') || 'General enquiry').toString().trim();
+      const message = (data.get('message') || '').toString().trim();
+
+      const subject = `Website enquiry — ${type}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Phone: ${phone || 'Not provided'}`,
+        `Enquiry type: ${type}`,
+        '',
+        message
+      ].join('\n');
+
+      window.location.href = `mailto:info@lfgholdings.com.au?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
 </script>
 
 </body>
